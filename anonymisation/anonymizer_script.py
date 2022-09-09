@@ -2,6 +2,7 @@ import psycopg2
 import os
 import csv
 import pandas as pd
+from datetime import datetime, date
 
 # Variables used by k-anonymity
 k = 3
@@ -46,21 +47,48 @@ def db_export(conn):
     data = pd.DataFrame(result, columns = columns)
     return data
 
+def get_age(data):
+    birthDate = datetime.strptime(data, '%Y-%m-%d')
+    today = date.today()
+    age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
+    return abs(age)
+
+def process_age(data):
+    process_result = ""
+    process_result += ";" + data[:-3]
+    process_result += ";" + data[:-6]
+    age = get_age(data)
+    process_result += ";" + str(age)
+    process_result += ";" + str(int(age/10) * 10) + "-" + str((int(age/10) + 1) * 10)
+    return process_result
+    
+
+
 def get_hierarchy(data, datatype):
+    data = str(data)
+    end = ";*"
+    result = data
     if datatype == "age":
-        pass
+        result += process_age(data)
     elif datatype == "postal":
-        pass
+        result += ";" + data[:-1] + "*"
+        result += ";" + data[:-2] + "**"
+        result += ";" + data[:-3] + "***"
+        result += ";" + data[:-4] + "****"
+        result += ";" + data[:-5] + "*****"
     elif datatype == "gender":
         pass
     else:
         return None
+    return result + end
 
 def generate_hierarchy(data):
     for i in quasi_identifiers:
-        for each in data[columns[i]].unique():
-            print(each)
-            get_hierarchy(each, columns_type[i])
+        with open(datafolder + dataset + "/hierarchies/" + dataset + '_hierarchy_' + columns[i] +'.csv', 'w') as f:
+            writer = csv.writer(f)
+            for each in data[columns[i]].unique():
+                result = get_hierarchy(each, columns_type[i])
+                writer.writerow([result])
         
 
 def db_con(dbargs):
@@ -88,7 +116,6 @@ def main():
     conn.close()
     # Create generalization hierarchy files
     generate_hierarchy(data)
-    
 
     # k-anonymity by kaylode
     kanon_args = "--method=mondrian --k="+str(k)+" --dataset="+dataset
