@@ -7,7 +7,7 @@ from datetime import datetime, date
 # Variables used by k-anonymity
 k = 3
 dataset = "traceit"
-datafolder = "./k-anonymity/data/"
+datafolder = "./kanonymity/data/"
 
 # Variables used by database
 maindb = ["localhost","traceit_test","postgres","password"]
@@ -119,7 +119,9 @@ def main():
 
     # k-anonymity by kaylode
     kanon_args = "--method=mondrian --k="+str(k)+" --dataset="+dataset
-    os.system("python3 ./k-anonymity/test.py "+kanon_args)
+    os.chdir(r"./kanonymity")
+    os.system("python3 anonymize.py "+kanon_args)
+    os.chdir(r"../")
 
     # Gather anonymized data in results and add to research database
 

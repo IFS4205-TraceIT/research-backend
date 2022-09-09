@@ -34,9 +34,9 @@ def get_dataset_params(name):
         IS_CAT = [False, True, False]
         max_numeric = {"age": 50, "city_birth": None, "zip_code":50000}
     elif name == Dataset.TRACEIT:
-        QI_INDEX = [3]
-        target_var = "dob"
-        IS_CAT = [False]
+        QI_INDEX = [2,3]
+        target_var = "name"
+        IS_CAT = [False, False, False]
         max_numeric = {}
     else:
         print(f"Not support {name} dataset")
