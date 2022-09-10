@@ -12,13 +12,14 @@ datafolder = "./kanonymity/data/"
 resultfolder = "./kanonymity/results/"
 
 # Variables used by database
+# [ip address, database name, username, password]
 maindb = ["localhost","traceit_test","postgres","password"]
 researchdb = ["localhost","traceit_research_test","postgres","password"]
 
 
 # Important columns_type = {age, postal, gender}
-columns_type = ["age", "gender", "postal", "text"]
-columns = ["dob","gender", "postal_code", "email"]
+columns_type = ["age", "gender", "postal", "si", "si", "si", "si", "si", "si"]
+columns = ["dob","gender", "postal_code", "list_of_vaccines", "last_close_contact", "last_infected_date", "total_infection", "total_close_contact_as_infected", "total_close_contact_with_infected"]
 quasi_identifiers = [0, 1 ,2] # Store them by the array index
 
 query = """
@@ -117,7 +118,12 @@ def clean_db(conn, cur):
             dob text,
             gender text,
             postal_code text,
-            email text
+            list_of_vaccines text,
+            last_close_contact text,
+            last_infected_date text,
+            total_infection bigint,
+            total_close_contact_as_infected bigint,
+            total_close_contact_with_infected bigint
         )
     """
 
@@ -132,7 +138,9 @@ def db_import(conn):
     clean_db(conn, cur)
 
     insert_statement = """
-        insert into researchdata(dob, gender, postal_code, email) values(%s, %s, %s, %s)
+        insert into researchdata
+        (dob, gender, postal_code, list_of_vaccines, last_close_contact, last_infected_date, total_infection, total_close_contact_as_infected, total_close_contact_with_infected) 
+        values(%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
     with open(resultfolder + dataset + "/" + kalgo + "/" + dataset + "_anonymized_" + str(k) + ".csv",'r') as f:
