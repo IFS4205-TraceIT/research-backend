@@ -66,7 +66,7 @@ def write_anon(path, anon_data, header, k, dataset, delimiter=';'):
         anon_data = anon_data.values()
     else:
         # Sort by ID (first column)
-        anon_data = sorted(anon_data, key=lambda x: int(x[0]))
+        # anon_data = sorted(anon_data, key=lambda x: int(x[0]))
         anon_data = [anon_data]
     for i, data in enumerate(anon_data):
         with open(os.path.join(path, dataset + "_anonymized_" + str(k) + ".csv"), mode='w', newline='') as anon_file:

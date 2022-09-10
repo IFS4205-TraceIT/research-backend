@@ -3,7 +3,7 @@ from utils.types import Dataset
 
 def get_dataset_params(name):
     if name == Dataset.ADULT:
-        QI_INDEX = [1, 2, 3, 4, 5, 6, 7, 8]
+        QI_INDEX = [2, 3, 4, 5, 6, 7, 8]
         target_var = 'salary-class'
         IS_CAT = [True, False, True, True, True, True, True, True]
         max_numeric = {"age": 50.5}
@@ -34,8 +34,8 @@ def get_dataset_params(name):
         IS_CAT = [False, True, False]
         max_numeric = {"age": 50, "city_birth": None, "zip_code":50000}
     elif name == Dataset.TRACEIT:
-        QI_INDEX = [2,3]
-        target_var = "name"
+        QI_INDEX = [0,1,2]
+        target_var = "email"
         IS_CAT = [False, False, False]
         max_numeric = {}
     else:

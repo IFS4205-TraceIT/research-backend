@@ -5,23 +5,24 @@ import pandas as pd
 from datetime import datetime, date
 
 # Variables used by k-anonymity
-k = 3
+k = 10
+kalgo = "mondrian"
 dataset = "traceit"
 datafolder = "./kanonymity/data/"
+resultfolder = "./kanonymity/results/"
 
 # Variables used by database
 maindb = ["localhost","traceit_test","postgres","password"]
 researchdb = ["localhost","traceit_research_test","postgres","password"]
 
-tables = ["patients","medicals"]
-columns = ["id","name","dob","zip_code", "code"]
-columns_type = ["integer", "text", "age", "postal", "integer"]
-quasi_identifiers = [2,3] # Store them by the array index
+columns = ["dob","gender", "postal_code", "email"]
+# Important columns_type = {age, postal, gender}
+columns_type = ["age", "gender", "postal", "text"]
+
+quasi_identifiers = [0, 1 ,2] # Store them by the array index
 
 query = """
-    select p.id, p.name, p.dob, p.zip_code, m.code 
-    from patients p, medicals m
-    where p.id = m.user_id
+    select * from researchdata
 """
 
 def filter_data(list):
@@ -104,7 +105,45 @@ def db_con(dbargs):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     return None
-    
+
+
+def clean_db(conn, cur):
+    delete_statement = """
+        drop table if exists researchdata
+    """
+
+    create_statement = """
+        create table researchdata(
+            id serial primary key,
+            dob text,
+            gender text,
+            postal_code text,
+            email text
+        )
+    """
+
+    cur.execute(delete_statement)
+    conn.commit()
+
+    cur.execute(create_statement)
+    conn.commit()
+
+def db_import(conn):
+    cur = conn.cursor()
+    clean_db(conn, cur)
+
+    insert_statement = """
+        insert into researchdata(dob, gender, postal_code, email) values(%s, %s, %s, %s)
+    """
+
+    with open(resultfolder + dataset + "/" + kalgo + "/" + dataset + "_anonymized_" + str(k) + ".csv",'r') as f:
+        next(f)
+        reader = csv.reader(f)
+        for each in reader:
+            temp = tuple(each[0].split(";"))
+            cur.execute(insert_statement,temp)
+            conn.commit()
+            
 
 def main():
     conn = db_con(maindb)
@@ -118,13 +157,15 @@ def main():
     generate_hierarchy(data)
 
     # k-anonymity by kaylode
-    kanon_args = "--method=mondrian --k="+str(k)+" --dataset="+dataset
+    kanon_args = "--method="+ kalgo +" --k="+str(k)+" --dataset="+dataset
     os.chdir(r"./kanonymity")
     os.system("python3 anonymize.py "+kanon_args)
     os.chdir(r"../")
 
     # Gather anonymized data in results and add to research database
-
+    conn = db_con(researchdb)
+    db_import(conn)
+    conn.close()
     
 
 if __name__ == '__main__':
