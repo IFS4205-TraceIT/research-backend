@@ -1,0 +1,64 @@
+{
+    "type": "array",
+    "length": {
+        "type": "number",
+        "constant": 1
+    },
+    "content": {
+        "type": "object",
+        "id": {
+            "type": "unique",
+            "content" :{
+                "type": "string",
+                "uuid" : {}
+            }
+        },
+        "nric": {
+            "type": "unique",
+            "content" :{
+                "type": "string",
+                "pattern" : "S[0-9]{7}[A-Z]{1}"
+            }
+        },
+        "name":{
+            "type": "string",
+            "faker": {
+                "generator": "name"
+            }
+        },
+        "dob":{
+            "type": "date_time",
+            "format": "%Y-%m-%d",
+            "subtype": "naive_date",
+            "begin": "1900-01-01",
+            "end": "2022-09-01"
+        },
+        "email":{
+            "type": "string",
+            "faker":{
+                "generator":"free_email"
+            }
+        },
+        "phone":{
+            "type": "number",
+            "range": {
+                "low": 80000000,
+                "high": 99999999
+            }
+        },
+        "gender":{
+            "type": "string",
+            "pattern":"(Male|Female)"
+        },
+        "address":{
+            "type":"string",
+            "faker":{
+                "generator":"street_name"
+            }
+        },
+        "postal_code":{
+            "type":"string",
+            "pattern" : "[0-9]{6}"
+        }
+    }
+}

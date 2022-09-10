@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, date
 
 # Variables used by k-anonymity
-k = 10
+k = 2
 kalgo = "mondrian"
 dataset = "traceit"
 datafolder = "./kanonymity/data/"
@@ -15,10 +15,10 @@ resultfolder = "./kanonymity/results/"
 maindb = ["localhost","traceit_test","postgres","password"]
 researchdb = ["localhost","traceit_research_test","postgres","password"]
 
-columns = ["dob","gender", "postal_code", "email"]
+
 # Important columns_type = {age, postal, gender}
 columns_type = ["age", "gender", "postal", "text"]
-
+columns = ["dob","gender", "postal_code", "email"]
 quasi_identifiers = [0, 1 ,2] # Store them by the array index
 
 query = """
@@ -57,7 +57,6 @@ def get_age(data):
 def process_age(data):
     process_result = ""
     process_result += ";" + data[:-3]
-    process_result += ";" + data[:-6]
     age = get_age(data)
     process_result += ";" + str(age)
     process_result += ";" + str(int(age/10) * 10) + "-" + str((int(age/10) + 1) * 10)
