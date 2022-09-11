@@ -2,7 +2,7 @@
     "type": "array",
     "length": {
         "type": "number",
-        "constant": 1
+        "constant": 20
     },
     "content": {
         "type": "object",

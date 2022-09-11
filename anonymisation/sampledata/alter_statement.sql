@@ -39,6 +39,7 @@ alter table vaccinationhistory
 ADD constraint vaccinationhistory_user_id_fkey
 foreign key (user_id) references users (id);
 
+drop view if exists researchdata;
 create or replace view researchdata as (
 	select u.dob, u.gender, u.postal_code, 
 	ARRAY(
@@ -47,12 +48,12 @@ create or replace view researchdata as (
 		where vh.vaccination_id = vt.id and vh.user_id = u.id
 	) as list_of_vaccines,
 	(
-		select max(cc.contact_timestamp)
+		select date(max(cc.contact_timestamp))
 		from closecontacts cc
 		where cc.contacted_user_id = u.id
 	) as last_close_contact,
 	(
-		select max(ih.recorded_timestamp)
+		select date(max(ih.recorded_timestamp))
 		from infectionhistory ih
 		where ih.user_id = u.id
 	) as last_infected_date,
