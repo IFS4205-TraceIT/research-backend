@@ -35,7 +35,7 @@ def get_dataset_params(name):
         max_numeric = {"age": 50, "city_birth": None, "zip_code":50000}
     elif name == Dataset.TRACEIT:
         QI_INDEX = [0,1,2]
-        target_var = "last_infected_date"
+        target_var = ""
         IS_CAT = [False, False, False]
         max_numeric = {}
     else:

@@ -26,9 +26,18 @@ query = """
     select * from researchdata
 """
 
+def list_to_string(list):
+    result = ""
+    delim = "/"
+    for each in list:
+        result += (str(each) + delim)
+    return result[:-1]
+
 def filter_data(list):
     result = ""
     for each in list:
+        if type(each) == type([]):
+            each = list_to_string(each)
         result += str(each)+";"
     return result[:-1]
 
