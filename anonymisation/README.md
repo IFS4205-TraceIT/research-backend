@@ -13,6 +13,7 @@
 The files to be customized and changed are ```anonymizer_script.py``` for database connection. The 2 database name used are ```traceit_test``` and ```traceit_research_test```.
 1. Create the 2 databases ```traceit_test``` and ```traceit_research_test```
 2. Edit the file ```anonymizer_script.py``` and change the global variable of ```maindb``` and ```researchdb``` to suit your database connection settings.
+3. Edit the file ```sampledata/traceit_test/users.json``` of the sttings on ```constant```, change the constant to the amount of users you want to generate. 
 
 ## Generating test data
 1. Execute the ```init_statement.sql``` in sampledata. This will create all tables used for the main system database.
