@@ -1,0 +1,27 @@
+{
+    "type": "array",
+    "length": {
+        "type": "number",
+        "constant": 10
+    },
+    "content": {
+        "type": "object",
+        "id": {
+            "type": "number",
+            "id": {}
+        },
+        "name":{
+            "type": "string",
+            "faker": {
+                "generator": "company_name"
+            }
+        },
+        "start_date":{
+            "type": "date_time",
+            "format": "%Y-%m-%d",
+            "subtype": "naive_date",
+            "begin": "2020-01-01",
+            "end": "2022-06-01"
+        }
+    }
+}
