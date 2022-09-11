@@ -30,8 +30,11 @@ BEGIN
 						   timestamp '2020-01-01 00:00:00')
 								));
 			temp_id := (select floor(random()*(10-1+1))+1);
-			insert into vaccinationhistory(user_id, vaccination_id, date_taken) 
-			values(current_user_id, temp_id,random_date_time);
+			BEGIN
+				insert into vaccinationhistory(user_id, vaccination_id, date_taken) 
+				values(current_user_id, temp_id,random_date_time);
+			EXCEPTION WHEN unique_violation THEN 
+			END;
 		END LOOP;
 		-- Generate closecontacts
 		temp_int := (select count(id) from infectionhistory ih where ih.user_id = (select current_user_id));
@@ -48,8 +51,7 @@ BEGIN
 				BEGIN
 					insert into closecontacts(infected_user_id, contacted_user_id, contact_timestamp, rssi) 
 					values(current_user_id, temp_user_id, random_date_time, temp_int);
-				EXCEPTION WHEN check_violation THEN
-					raise notice '% %', SQLERRM, SQLSTATE;
+				EXCEPTION WHEN unique_violation THEN
 				END;
 			END LOOP;
 		end if;
