@@ -87,7 +87,9 @@ create table CloseContacts(
 		ON DELETE CASCADE,
 	contact_timestamp timestamp not null,
 	rssi numeric not null,
-	unique(infected_user_id, contacted_user_id, contact_timestamp),
+	infectionhistory_id integer references InfectionHistory(id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
 	constraint different_user check(
 		infected_user_id <> contacted_user_id
 	)

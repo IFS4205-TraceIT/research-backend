@@ -7,6 +7,8 @@ DECLARE
 	temp_id int;
 	temp_user_id uuid;
 	temp_int int;
+	temp_infectionh_id int;
+	temp_timestamp timestamp;
 BEGIN
 	for row in (select * from users) LOOP
 		current_user_id := row.id;
@@ -41,16 +43,18 @@ BEGIN
 		if temp_int > 0 then
 			ballot := (select floor(random()*(200-0+1))+0);
 			for i in 1..ballot LOOP
+				temp_infectionh_id := (select id from infectionhistory ih where ih.user_id = (select current_user_id) order by random() limit 1);
+				temp_timestamp := (select recorded_timestamp from infectionhistory ih where ih.id = (select temp_infectionh_id));
 				temp_user_id := (select w.id from users w where w.id <> (select current_user_id) order by random() limit 1);
 				random_date_time := (
-					select timestamp '2020-01-01 00:00:00' +
-				   random() * (timestamp '2022-09-11 12:00:00' -
-							   timestamp '2020-01-01 00:00:00')
+					select (select temp_timestamp) - INTERVAL '14 DAY' +
+				   random() * ((select temp_timestamp) -
+							   ((select temp_timestamp) - INTERVAL '14 DAY'))
 									);
 				temp_int := (select floor(random()*(100-1+1))+1);
 				BEGIN
-					insert into closecontacts(infected_user_id, contacted_user_id, contact_timestamp, rssi) 
-					values(current_user_id, temp_user_id, random_date_time, temp_int);
+					insert into closecontacts(infected_user_id, contacted_user_id, contact_timestamp, rssi, infectionhistory_id) 
+					values(current_user_id, temp_user_id, random_date_time, temp_int, temp_infectionh_id);
 				EXCEPTION WHEN unique_violation THEN
 				END;
 			END LOOP;
