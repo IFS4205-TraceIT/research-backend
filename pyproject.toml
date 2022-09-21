@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "research-backend"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "research_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+djangorestframework = "^3.13.1"
+djangorestframework-simplejwt = "^5.2.0"
+gunicorn = "^20.1.0"
+whitenoise = "^6.2.0"
+psycopg2-binary = "^2.9.3"
+hvac = "^1.0.2"
+django-cors-headers = "^3.13.0"
+Django = {extras = ["argon2"], version = "^4.1.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
