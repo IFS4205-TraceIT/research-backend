@@ -5,11 +5,15 @@ import pandas as pd
 from datetime import datetime, date
 
 # Variables used by k-anonymity
-k = 2
+k = 10
 kalgo = "mondrian"
 dataset = "traceit"
 datafolder = "./kanonymity/data/"
 resultfolder = "./kanonymity/results/"
+
+# SQLs files
+view_file = "researchdata_view.sql"
+researchdb_file = "researchdb.sql"
 
 # Variables used by database
 # [ip address, database name, username, password]
@@ -21,10 +25,6 @@ researchdb = ["localhost","traceit_research_test","postgres","password"]
 columns_type = ["age", "gender", "postal", "si", "si", "si", "si", "si", "si"]
 columns = ["dob","gender", "postal_code", "list_of_vaccines", "last_close_contact", "last_infected_date", "total_infection", "total_close_contact_as_infected", "total_close_contact_with_infected"]
 quasi_identifiers = [0, 1 ,2] # Store them by the array index
-
-query = """
-    select * from researchdata
-"""
 
 def list_to_string(list):
     result = ""
@@ -52,7 +52,9 @@ def write_to_file(result):
 
 def db_export(conn):
     cur = conn.cursor()
-    cur.execute(query)
+    sql_file = open(view_file)
+    sql_as_string = sql_file.read()
+    cur.execute(sql_as_string)
     result = cur.fetchall()
     write_to_file(result)
     data = pd.DataFrame(result, columns = columns)
@@ -117,29 +119,9 @@ def db_con(dbargs):
 
 
 def clean_db(conn, cur):
-    delete_statement = """
-        drop table if exists researchdata
-    """
-
-    create_statement = """
-        create table researchdata(
-            id serial primary key,
-            dob text,
-            gender text,
-            postal_code text,
-            list_of_vaccines text,
-            last_close_contact text,
-            last_infected_date text,
-            total_infection bigint,
-            total_close_contact_as_infected bigint,
-            total_close_contact_with_infected bigint
-        )
-    """
-
-    cur.execute(delete_statement)
-    conn.commit()
-
-    cur.execute(create_statement)
+    sql_file = open(researchdb_file)
+    sql_as_string = sql_file.read()
+    cur.execute(sql_as_string)
     conn.commit()
 
 def db_import(conn):

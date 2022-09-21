@@ -7,12 +7,12 @@ create or replace view researchdata as (
 		where vh.vaccination_id = vt.id and vh.user_id = u.id
 	) as list_of_vaccines,
 	(
-		select max(cc.contact_timestamp)
+		select DATE(max(cc.contact_timestamp))
 		from closecontacts cc
 		where cc.contacted_user_id = u.id
 	) as last_close_contact,
 	(
-		select max(ih.recorded_timestamp)
+		select DATE(max(ih.recorded_timestamp))
 		from infectionhistory ih
 		where ih.user_id = u.id
 	) as last_infected_date,
@@ -33,3 +33,5 @@ create or replace view researchdata as (
 	) as total_close_contact_with_infected
  	from Users u
 );
+
+select * from researchdata;
