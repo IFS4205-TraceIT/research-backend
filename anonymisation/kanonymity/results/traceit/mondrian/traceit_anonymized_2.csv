@@ -1,3 +1,106 @@
+<<<<<<< HEAD
+dob;gender;postal_code;list_of_vaccines;last_close_contact;last_infected_date;total_infection;total_close_contact_as_infected;total_close_contact_with_infected
+80-90;Female;*;Bruen Inc/Mueller and Schiller and Sons/Rempel and Sons;2022-08-30;2022-07-26;2;75;90
+80-90;Female;*;Smith and Kohler Inc/McCullough and Strosin and Sons/Rempel and Sons;2022-08-09;2021-09-20;3;118;74
+80-90;Female;*;Smith and Kohler Inc/Kertzmann and Sons/Bruen Inc;2022-08-28;2022-07-05;5;199;75
+80-90;Female;*;Lindgren Inc;2022-09-04;2022-01-11;3;101;100
+80-90;Male;*;Stracke and Bogan Group/McCullough and Strosin and Sons/Stracke and Bogan Group/Bruen Inc/Frami and Baumbach Inc;2022-08-11;None;0;0;102
+80-90;Male;*;Kertzmann and Sons/Stracke and Bogan Group/Kertzmann and Sons/Torp LLC;2022-08-18;2022-04-29;3;109;89
+80-90;Male;*;Frami and Baumbach Inc;2022-08-28;2022-01-09;4;30;80
+80-90;Male;*;Stracke and Bogan Group/Mueller and Schiller and Sons/Torp LLC/Stracke and Bogan Group/Rempel and Sons;2022-08-25;2022-03-18;4;0;88
+80-90;Male;*;Bruen Inc/Bruen Inc/Mueller and Schiller and Sons;2022-07-18;2020-09-03;2;24;79
+80-90;Male;*;Mueller and Schiller and Sons/McCullough and Strosin and Sons/Lindgren Inc;2022-09-01;2021-09-24;3;79;86
+70-80;Female;*;Rempel and Sons/Frami and Baumbach Inc/Smith and Kohler Inc/Mueller and Schiller and Sons/Bruen Inc;2022-08-16;2022-04-19;3;26;87
+70-80;Female;*;;2022-07-25;2022-05-18;2;146;71
+70-80;Female;*;McCullough and Strosin and Sons/Rempel and Sons/Kertzmann and Sons;2022-08-22;2022-07-01;5;29;79
+70-80;Male;*;Mueller and Schiller and Sons/Torp LLC/Rempel and Sons/Stracke and Bogan Group;2022-08-25;None;0;0;81
+70-80;Male;*;Smith and Kohler Inc/Torp LLC/Kertzmann and Sons;2022-09-01;2022-07-25;5;77;87
+70-80;Male;*;Stracke and Bogan Group/Mueller and Schiller and Sons/Rempel and Sons/Frami and Baumbach Inc;2022-09-03;None;0;0;80
+70-80;Male;*;Lindgren Inc/Lindgren Inc;2022-08-23;None;0;0;72
+70-80;Male;*;;2022-08-29;2022-07-26;5;193;90
+110-120;Female;*;;2022-08-15;2022-09-05;2;129;83
+110-120;Female;*;Bruen Inc/Smith and Kohler Inc/Frami and Baumbach Inc;2022-08-25;2022-06-07;2;193;95
+110-120;Female;*;Bruen Inc/Rempel and Sons/Mueller and Schiller and Sons/Lindgren Inc/Smith and Kohler Inc;2022-08-22;None;0;0;66
+110-120;Male;*;Lindgren Inc/Rempel and Sons/Stracke and Bogan Group/Stracke and Bogan Group;2022-08-28;2022-03-15;4;96;85
+110-120;Male;*;Rempel and Sons;2022-09-01;2020-08-17;2;17;103
+110-120;Male;*;;2022-08-30;2020-07-29;1;185;60
+110-120;Male;*;Torp LLC/Mueller and Schiller and Sons/Kertzmann and Sons;2022-08-10;2022-02-02;5;4;71
+110-120;Male;*;;2022-08-31;2022-08-23;2;152;99
+110-120;Male;*;;2022-08-07;2022-04-19;4;134;72
+110-120;Male;*;Rempel and Sons/Kertzmann and Sons/Bruen Inc/Smith and Kohler Inc;2022-08-22;None;0;0;88
+30-40;Female;*;Frami and Baumbach Inc/Torp LLC/Frami and Baumbach Inc/Rempel and Sons/McCullough and Strosin and Sons;2022-08-30;2022-03-14;3;148;84
+30-40;Female;*;Rempel and Sons;2022-08-15;None;0;0;96
+30-40;Female;*;Mueller and Schiller and Sons;2022-08-31;2022-03-20;3;175;89
+30-40;Female;*;Bruen Inc/Kertzmann and Sons/Rempel and Sons/Bruen Inc/Rempel and Sons;2022-08-09;2022-07-11;3;107;95
+30-40;Male;*;Lindgren Inc/Frami and Baumbach Inc/Rempel and Sons/Torp LLC;2022-08-21;2021-11-11;4;71;85
+30-40;Male;*;Smith and Kohler Inc;2022-09-06;2021-08-11;4;110;91
+30-40;Male;*;Stracke and Bogan Group/Stracke and Bogan Group/Rempel and Sons/Rempel and Sons;2022-08-25;2022-04-09;3;131;75
+30-40;Male;*;McCullough and Strosin and Sons;2022-08-22;2022-05-16;4;52;76
+30-40;Male;*;Lindgren Inc/Mueller and Schiller and Sons/Bruen Inc/Lindgren Inc/Bruen Inc;2022-07-24;2021-11-25;5;166;79
+100-110;Female;*;McCullough and Strosin and Sons/Smith and Kohler Inc/Kertzmann and Sons;2022-08-13;2022-07-14;2;32;71
+100-110;Female;*;Mueller and Schiller and Sons/Torp LLC/Mueller and Schiller and Sons/Frami and Baumbach Inc;2022-07-24;2021-03-08;2;189;74
+100-110;Female;*;Kertzmann and Sons/Torp LLC/McCullough and Strosin and Sons/Bruen Inc;2022-08-26;2022-07-04;3;35;92
+100-110;Male;*;Torp LLC/Frami and Baumbach Inc;2022-08-30;2021-12-11;5;113;80
+100-110;Male;*;Bruen Inc/Stracke and Bogan Group/Lindgren Inc;2022-08-20;2022-03-02;3;114;70
+100-110;Male;*;;2022-08-31;2022-05-05;2;6;80
+100-110;Male;*;Stracke and Bogan Group/Mueller and Schiller and Sons/Lindgren Inc/Smith and Kohler Inc/Torp LLC;2022-07-24;2022-08-20;2;101;86
+100-110;Male;*;Rempel and Sons/Rempel and Sons/Stracke and Bogan Group;2022-08-22;None;0;0;96
+100-110;Male;*;Bruen Inc;2022-08-18;None;0;0;83
+100-110;Male;*;Mueller and Schiller and Sons;2022-08-21;2021-10-01;5;139;82
+100-110;Male;*;Lindgren Inc/Smith and Kohler Inc/Stracke and Bogan Group/Rempel and Sons;2022-09-04;2021-11-08;1;8;81
+100-110;Male;*;Kertzmann and Sons/Torp LLC/Kertzmann and Sons/Smith and Kohler Inc/Lindgren Inc;2022-08-27;2021-05-22;1;195;86
+100-110;Male;*;Bruen Inc/Mueller and Schiller and Sons/Lindgren Inc/McCullough and Strosin and Sons;2022-08-10;None;0;0;79
+60-70;*;*;Rempel and Sons/Frami and Baumbach Inc;2022-08-25;None;0;0;90
+60-70;*;*;Smith and Kohler Inc;2022-07-26;None;0;0;82
+60-70;*;*;;2022-09-04;2022-02-01;5;38;84
+60-70;*;*;Frami and Baumbach Inc/McCullough and Strosin and Sons/Bruen Inc;2022-09-05;2021-06-18;3;155;103
+60-70;*;*;Frami and Baumbach Inc/Smith and Kohler Inc/Stracke and Bogan Group;2022-07-18;2021-11-01;2;72;68
+40-50;*;*;Stracke and Bogan Group/Lindgren Inc/McCullough and Strosin and Sons/McCullough and Strosin and Sons;2022-08-18;2021-01-30;1;193;87
+40-50;*;*;Mueller and Schiller and Sons;2022-09-02;2021-10-28;4;77;80
+40-50;*;*;Mueller and Schiller and Sons/McCullough and Strosin and Sons/McCullough and Strosin and Sons/Mueller and Schiller and Sons;2022-08-23;None;0;0;74
+0-10;*;*;Torp LLC/Stracke and Bogan Group;2022-08-19;2021-01-28;2;47;81
+0-10;*;*;McCullough and Strosin and Sons/Mueller and Schiller and Sons;2022-08-30;2020-07-22;2;148;83
+0-10;*;*;;2022-08-22;2022-04-06;3;98;81
+0-10;*;*;Torp LLC/Torp LLC/Lindgren Inc;2022-08-28;2022-06-25;2;180;78
+0-10;*;*;;2022-06-27;2022-07-27;4;171;69
+0-10;*;*;Torp LLC/Stracke and Bogan Group/Frami and Baumbach Inc;2022-08-16;None;0;0;93
+90-100;Female;*;;2022-08-23;2021-01-28;1;179;64
+90-100;Female;*;Torp LLC/Mueller and Schiller and Sons;2022-08-12;2021-09-08;5;195;83
+90-100;Female;*;Rempel and Sons/Smith and Kohler Inc/McCullough and Strosin and Sons/Frami and Baumbach Inc;2022-09-03;2022-04-30;4;4;97
+90-100;Female;*;Torp LLC;2022-09-03;None;0;0;82
+90-100;Male;*;Smith and Kohler Inc;2022-08-15;2022-06-27;5;170;77
+90-100;Male;*;;2022-08-25;2022-06-15;2;121;90
+90-100;Male;*;;2022-08-28;2022-09-06;4;44;98
+90-100;Male;*;McCullough and Strosin and Sons/Mueller and Schiller and Sons/Mueller and Schiller and Sons;2022-09-04;None;0;0;90
+90-100;Male;*;Lindgren Inc/Stracke and Bogan Group/Rempel and Sons;2022-08-28;2021-05-14;4;66;102
+20-30;Female;*;Frami and Baumbach Inc/Kertzmann and Sons/Torp LLC;2022-08-27;2021-12-17;3;118;93
+20-30;Female;*;Rempel and Sons/Stracke and Bogan Group/McCullough and Strosin and Sons/Kertzmann and Sons/Rempel and Sons;2022-08-17;2021-08-24;2;107;88
+20-30;Female;*;Kertzmann and Sons/Stracke and Bogan Group/Smith and Kohler Inc/Rempel and Sons;2022-09-04;2021-07-09;1;187;96
+20-30;Female;*;Smith and Kohler Inc/Kertzmann and Sons/Frami and Baumbach Inc;2022-08-31;2022-05-20;1;125;90
+20-30;Female;*;Kertzmann and Sons/Kertzmann and Sons;2022-08-31;2022-04-21;4;116;80
+20-30;Female;*;Bruen Inc/Bruen Inc/Bruen Inc;2022-08-27;2021-11-14;4;107;80
+20-30;Female;*;Mueller and Schiller and Sons/Torp LLC/Rempel and Sons/Bruen Inc;2022-08-11;2021-06-14;2;43;70
+20-30;Male;*;;2022-08-23;2021-07-14;1;149;88
+20-30;Male;*;;2022-08-11;2022-08-22;5;42;82
+20-30;Male;*;Kertzmann and Sons/Rempel and Sons;2022-08-26;2021-09-08;3;62;75
+20-30;Male;*;Frami and Baumbach Inc/Torp LLC/Frami and Baumbach Inc/McCullough and Strosin and Sons;2022-08-28;2022-03-29;4;104;82
+20-30;Male;*;Smith and Kohler Inc/Lindgren Inc/Smith and Kohler Inc;2022-09-01;2021-10-03;2;42;83
+122;*;*;;2022-08-30;2022-01-15;2;176;81
+122;*;*;Mueller and Schiller and Sons/Bruen Inc/McCullough and Strosin and Sons/Kertzmann and Sons/Smith and Kohler Inc;2022-08-20;2021-11-03;5;186;91
+50-60;*;*;;2022-08-19;2022-05-03;5;33;109
+50-60;*;*;;2022-08-25;2021-07-07;2;14;83
+50-60;*;*;;2022-08-22;2021-12-15;5;6;85
+50-60;*;*;Torp LLC/Stracke and Bogan Group/Bruen Inc;2022-07-19;2022-06-26;1;160;83
+50-60;*;*;Bruen Inc/Torp LLC/Stracke and Bogan Group;2022-08-16;2020-01-10;1;61;72
+50-60;*;*;;2022-08-14;None;0;0;84
+10-20;Female;*;Smith and Kohler Inc/Smith and Kohler Inc/Kertzmann and Sons;2022-07-14;2022-06-13;3;127;58
+10-20;Female;*;;2022-08-19;2022-06-04;2;88;88
+10-20;Male;*;Bruen Inc/Stracke and Bogan Group/Mueller and Schiller and Sons/Kertzmann and Sons;2022-08-29;2022-04-05;4;109;98
+10-20;Male;*;Torp LLC;2022-08-23;2020-06-17;2;98;83
+10-20;Male;*;McCullough and Strosin and Sons/Rempel and Sons/McCullough and Strosin and Sons;2022-07-21;2021-09-07;5;80;94
+10-20;Male;*;Mueller and Schiller and Sons;2022-09-01;2022-02-04;1;94;96
+10-20;Male;*;;2022-09-02;2022-08-26;4;2;92
+=======
 dob;gender;postal_code;list_of_vaccines;last_close_contact;last_infected_date;total_infection;total_close_contact_as_infected;total_close_contact_with_infected
 80-90;Female;37****;Stracke and Bogan Group/Torp LLC/Rempel and Sons;2022-09-07;None;0;0;77
 80-90;Female;37****;Smith and Kohler Inc/Smith and Kohler Inc/Rempel and Sons;2022-09-09;2022-09-02;5;107;84
@@ -9999,3 +10102,4 @@ dob;gender;postal_code;list_of_vaccines;last_close_contact;last_infected_date;to
 10-20;Male;07****;;2022-09-01;2021-10-31;4;139;71
 10-20;Male;07****;Smith and Kohler Inc/Kertzmann and Sons/Mueller and Schiller and Sons/Mueller and Schiller and Sons/Rempel and Sons;2022-09-01;2021-09-10;2;172;81
 10-20;Male;07****;McCullough and Strosin and Sons/Mueller and Schiller and Sons;2022-08-13;2021-11-13;2;9;92
+>>>>>>> main
