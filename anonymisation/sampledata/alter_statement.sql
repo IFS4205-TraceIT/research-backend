@@ -38,5 +38,3 @@ foreign key (user_id) references users (id);
 alter table vaccinationhistory
 ADD constraint vaccinationhistory_user_id_fkey
 foreign key (user_id) references users (id);
-
-

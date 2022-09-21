@@ -94,11 +94,3 @@ create table CloseContacts(
 		infected_user_id <> contacted_user_id
 	)
 );
-
-
-
-
-
-
-
-
