@@ -7,5 +7,6 @@ from .views import (
 app_name = 'researchs'
 
 urlpatterns = [
-    path('researchs', ListResearchAPIView.as_view())
+    path('researchs', ListResearchAPIView.as_view()),
+    path('researchs/<input>', ListResearchAPIView.as_view())
 ]

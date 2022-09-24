@@ -15,4 +15,12 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class ListResearchAPIView(ListAPIView):
     serializer_class = ResearchdataSerializer
-    queryset = Researchdata.objects.all()
+    lookup_url_kwarg = "input"
+
+    def get_queryset(self):
+        queryset = Researchdata.objects.all()
+        query = self.kwargs.get(self.lookup_url_kwarg, None)
+        if query is None:
+            return queryset
+        queryset = queryset.filter(list_of_vaccines__icontains=query)
+        return queryset
