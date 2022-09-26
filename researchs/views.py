@@ -15,17 +15,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class ListResearchAPIView(ListAPIView):
     serializer_class = ResearchdataSerializer
-
-    def get_queryset(self):
-        queryset = Researchdata.objects.all()
-        genderQuery = getData(self, "gender")
-        vaccinesQuery = getData(self, "vaccines")
-        print(genderQuery, vaccinesQuery)
-        if genderQuery is None and vaccinesQuery is None:
-            return queryset
-        queryset = filterData(queryset, genderQuery, "gender")
-        queryset = filterData(queryset, vaccinesQuery, "list_of_vaccines__icontains")
-        return queryset
+    queryset = Researchdata.objects.all()
     
 def getData(self, id):
     value = self.kwargs.get(id, None)
