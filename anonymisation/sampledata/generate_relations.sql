@@ -18,7 +18,7 @@ BEGIN
 		for i in 1..ballot LOOP
 			random_date_time := (
 				select timestamp '2020-01-01 00:00:00' +
-			   random() * (timestamp '2022-09-11 12:00:00' -
+			   random() * (NOW() -
 						   timestamp '2020-01-01 00:00:00')
 								);
 			insert into infectionhistory(user_id, recorded_timestamp) values(current_user_id, random_date_time);
@@ -26,12 +26,14 @@ BEGIN
 		-- Generate vaccinationhistory
 		ballot := (select floor(random()*(5-0+1))+0);
 		for i in 1..ballot LOOP
+			temp_id := (select floor(random()*(4-1+1))+1);
+			temp_timestamp := (select start_date from vaccinationtypes where id = (select temp_id));
 			random_date_time := (
-				select date(timestamp '2020-01-01 00:00:00' +
-			   random() * (timestamp '2022-09-11 12:00:00' -
-						   timestamp '2020-01-01 00:00:00')
+				select date((select temp_timestamp) +
+			   random() * (NOW() -
+						   (select temp_timestamp))
 								));
-			temp_id := (select floor(random()*(10-1+1))+1);
+			
 			BEGIN
 				insert into vaccinationhistory(user_id, vaccination_id, date_taken) 
 				values(current_user_id, temp_id,random_date_time);
