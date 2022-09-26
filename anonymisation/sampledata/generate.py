@@ -6,7 +6,7 @@ import string
 import uuid
 import os
 
-folder_name = "traceit_test"
+
 basefolder = os.getcwd() + '/anonymisation/sampledata/'
 db = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_PORT'],os.environ['POSTGRES_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
 
@@ -17,11 +17,6 @@ insert_user_sql = """
 insert_vaccine_sql = """
     INSERT INTO vaccinationtypes(name,start_date) values(%s,%s);
 """
-
-def synth_generate():
-    os.system("synth init")
-    #postgres://postgres:password@192.168.1.9:5432/traceit_test
-    os.system("synth generate "+ folder_name +"/ --to postgres://"+ db[3] +":"+ db[4] +"@"+ db[0] + ":" +db[1] +"/"+db[2])
 
 def user_generate(conn, total):
     fake = Faker()
@@ -89,7 +84,7 @@ def main():
     execute_sql(conn, basefolder + "create_table.sql")
     print("Generating primaries...")
     # Generate data for primary tables
-    user_generate(conn, 500)
+    user_generate(conn, 1000)
     vaccine_generate(conn)
     print("Generating relations...")
     # Generate secondary tables data
