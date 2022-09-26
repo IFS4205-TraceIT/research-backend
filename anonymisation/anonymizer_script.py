@@ -5,11 +5,13 @@ import pandas as pd
 from datetime import datetime, date
 
 # Variables used by k-anonymity
-k = 10
+k = 3
 kalgo = "mondrian"
 dataset = "traceit"
-datafolder = "./kanonymity/data/"
-resultfolder = "./kanonymity/results/"
+basefolder = os.getcwd() + '/anonymisation/'
+kanonymityfolder = "kanonymity"
+datafolder = basefolder + kanonymityfolder + "/data/"
+resultfolder = basefolder + kanonymityfolder + "/results/"
 
 # SQLs files
 view_file = "researchdata_view.sql"
@@ -17,8 +19,8 @@ researchdb_file = "researchdb.sql"
 
 # Variables used by database
 # [ip address, database name, username, password]
-maindb = ["localhost","traceit_test","postgres","password"]
-researchdb = ["localhost","traceit_research_test","postgres","password"]
+maindb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
+researchdb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_RESEARCH_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
 
 
 # Important columns_type = {age, postal, gender}
@@ -52,7 +54,7 @@ def write_to_file(result):
 
 def db_export(conn):
     cur = conn.cursor()
-    sql_file = open(view_file)
+    sql_file = open(basefolder + view_file)
     sql_as_string = sql_file.read()
     cur.execute(sql_as_string)
     result = cur.fetchall()
@@ -71,7 +73,7 @@ def process_age(data):
     process_result += ";" + data[:-3]
     age = get_age(data)
     process_result += ";" + str(age)
-    process_result += ";" + str(int(age/10) * 10) + "-" + str((int(age/10) + 1) * 10)
+    process_result += ";" + str(int(age/10) * 10) + "-" + str(((int(age/10) + 1) * 10)-1)
     return process_result
     
 
@@ -119,7 +121,7 @@ def db_con(dbargs):
 
 
 def clean_db(conn, cur):
-    sql_file = open(researchdb_file)
+    sql_file = open(basefolder + researchdb_file)
     sql_as_string = sql_file.read()
     cur.execute(sql_as_string)
     conn.commit()
@@ -156,9 +158,10 @@ def main():
 
     # k-anonymity by kaylode
     kanon_args = "--method="+ kalgo +" --k="+str(k)+" --dataset="+dataset
-    os.chdir(r"./kanonymity")
+    wdir = os.getcwd()
+    os.chdir(basefolder + kanonymityfolder)
     os.system("python3 anonymize.py "+kanon_args)
-    os.chdir(r"../")
+    os.chdir(wdir)
 
     # Gather anonymized data in results and add to research database
     conn = db_con(researchdb)

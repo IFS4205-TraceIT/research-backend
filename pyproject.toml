@@ -16,6 +16,8 @@ psycopg2-binary = "^2.9.3"
 hvac = "^1.0.2"
 django-cors-headers = "^3.13.0"
 Django = {extras = ["argon2"], version = "^4.1.1"}
+pandas = "^1.5.0"
+tqdm = "^4.64.1"
 
 
 [build-system]

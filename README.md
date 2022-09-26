@@ -33,7 +33,8 @@ Refer to the folder ```anonymisation```
         VAULT_TOKEN="dev-only-token" \
         POSTGRES_HOST="127.0.0.1" \
         POSTGRES_PORT="5432" \
-        POSTGRES_DB="test" \
+        POSTGRES_DB="test1" \
+        POSTGRES_RESEARCH_DB="test2" \
         POSTGRES_USER="test" \
         POSTGRES_PASSWORD="test"
     ```
