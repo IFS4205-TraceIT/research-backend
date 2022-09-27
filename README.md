@@ -5,8 +5,6 @@
 2. Add the following line into the file to allow connections to the server.
 ```host    all             all            <IP addr of server>          scram-sha-256```
 
-# Anonymization
-Refer to the folder ```anonymisation```
 
 # Research django web backend
 
@@ -41,5 +39,7 @@ Refer to the folder ```anonymisation```
 
 5. Run `poetry run python manage.py makemigrations` and `poetry run python manage.py migrate` to migrate the database.
 6. Run `poetry run python manage.py runserver` to start the server.
-7. Run `poetry run python anonymisation/sampledata/generate.py` to generate initial data for testing purposes.
-8. Run `poetry run python anonymisation/anonymizer_script.py` to start anonymizing process.
+
+# Anonymization and Sample Data
+1. Run `poetry run python anonymisation/sampledata/generate.py` to generate initial data for testing purposes.
+2. Run `poetry run python anonymisation/anonymizer_script.py` to start anonymizing process.
