@@ -32,7 +32,8 @@ def list_to_string(list):
     result = ""
     delim = "/"
     for each in list:
-        result += (str(each) + delim)
+        each = str(each).replace("/","")
+        result += (each + delim)
     return result[:-1]
 
 def filter_data(list):
@@ -40,7 +41,8 @@ def filter_data(list):
     for each in list:
         if type(each) == type([]):
             each = list_to_string(each)
-        result += str(each)+";"
+        each = str(each).replace(";","")
+        result += each+";"
     return result[:-1]
 
 def write_to_file(result):
