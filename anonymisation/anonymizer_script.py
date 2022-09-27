@@ -20,7 +20,7 @@ researchdb_file = "researchdb.sql"
 # Variables used by database
 # [ip address, database name, username, password]
 maindb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
-researchdb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_RESEARCH_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
+researchdb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_RESEARCH_DB'],os.environ['POSTGRES_RESEARCH_USER'],os.environ['POSTGRES_RESEARCH_PASSWORD']]
 
 
 # Important columns_type = {age, postal, gender}

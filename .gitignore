@@ -137,5 +137,4 @@ GitHub.sublime-settings
 .history
 
 # anonymisation data files
-anonymisation/kanonymity/data/
-anonymisation/kanonymity/results/
+*.csv
