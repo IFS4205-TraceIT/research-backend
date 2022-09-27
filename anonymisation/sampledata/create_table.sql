@@ -1,10 +1,9 @@
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
-
+DROP view if exists researchdata;
 DROP table if exists CloseContacts, Notifications, InfectionHistory, VaccinationHistory, BuildingAccess, Users, Buildings, VaccinationTypes, ContactTracers;
 
+
 create table Users(
-	id text primary key,
+	id uuid primary key,
 	nric text UNIQUE not NULL,
 	name text not null,
 	dob date not null,
@@ -23,7 +22,7 @@ create table Buildings(
 
 create table BuildingAccess(
 	id serial primary key,
-	user_id text references Users(id)
+	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	building_id integer references Buildings(id)
@@ -41,7 +40,7 @@ create table VaccinationTypes(
 
 create table VaccinationHistory(
 	id serial primary key,
-	user_id text references Users(id)
+	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	vaccination_id integer references VaccinationTypes(id)
@@ -53,7 +52,7 @@ create table VaccinationHistory(
 
 create table InfectionHistory(
 	id serial primary key,
-	user_id text references Users(id)
+	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	recorded_timestamp TIMESTAMP not null,
@@ -61,13 +60,13 @@ create table InfectionHistory(
 );
 
 create table ContactTracers(
-	id text primary key
+	id uuid primary key
 );
 
 create table Notifications(
 	due_date date,
 	start_date date,
-	tracer_id text references ContactTracers(id)
+	tracer_id uuid references ContactTracers(id)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
 	infection_id integer references infectionhistory(id)
@@ -79,10 +78,10 @@ create table Notifications(
 
 create table CloseContacts(
 	id serial primary key,
-	infected_user_id text references Users(id)
+	infected_user_id uuid references Users(id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	contacted_user_id text references Users(id)
+	contacted_user_id uuid references Users(id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	contact_timestamp timestamp not null,
@@ -94,3 +93,10 @@ create table CloseContacts(
 		infected_user_id <> contacted_user_id
 	)
 );
+
+
+
+
+
+
+

@@ -33,10 +33,13 @@ Refer to the folder ```anonymisation```
         VAULT_TOKEN="dev-only-token" \
         POSTGRES_HOST="127.0.0.1" \
         POSTGRES_PORT="5432" \
-        POSTGRES_DB="test" \
+        POSTGRES_DB="test1" \
+        POSTGRES_RESEARCH_DB="test2" \
         POSTGRES_USER="test" \
         POSTGRES_PASSWORD="test"
     ```
 
 5. Run `poetry run python manage.py makemigrations` and `poetry run python manage.py migrate` to migrate the database.
 6. Run `poetry run python manage.py runserver` to start the server.
+7. Run `poetry run python anonymisation/sampledata/generate.py` to generate initial data for testing purposes.
+8. Run `poetry run python anonymisation/anonymizer_script.py` to start anonymizing process.

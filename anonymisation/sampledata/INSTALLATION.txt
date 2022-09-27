@@ -1,2 +1,0 @@
-sudo curl -sSL https://getsynth.com/install | sh
-pip3 install psycopg2-binary
