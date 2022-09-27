@@ -1,7 +1,6 @@
 DROP view if exists researchdata;
 DROP table if exists CloseContacts, Notifications, InfectionHistory, VaccinationHistory, BuildingAccess, Users, Buildings, VaccinationTypes, ContactTracers;
 
-
 create table Users(
 	id uuid primary key,
 	nric text UNIQUE not NULL,
@@ -15,13 +14,13 @@ create table Users(
 );
 
 create table Buildings(
-	id serial primary key,
+	id bigserial primary key,
 	name text not null,
 	location integer not null
 );
 
 create table BuildingAccess(
-	id serial primary key,
+	id bigserial primary key,
 	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -33,13 +32,13 @@ create table BuildingAccess(
 );
 
 create table VaccinationTypes(
-	id serial primary key,
+	id bigserial primary key,
 	name text not null,
 	start_date date not null
 );
 
 create table VaccinationHistory(
-	id serial primary key,
+	id bigserial primary key,
 	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -51,7 +50,7 @@ create table VaccinationHistory(
 );
 
 create table InfectionHistory(
-	id serial primary key,
+	id bigserial primary key,
 	user_id uuid references Users(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -77,7 +76,7 @@ create table Notifications(
 );
 
 create table CloseContacts(
-	id serial primary key,
+	id bigserial primary key,
 	infected_user_id uuid references Users(id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
