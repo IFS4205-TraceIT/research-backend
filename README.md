@@ -34,7 +34,9 @@
         POSTGRES_DB="test1" \
         POSTGRES_RESEARCH_DB="test2" \
         POSTGRES_USER="test" \
-        POSTGRES_PASSWORD="test"
+        POSTGRES_RESEARCH_USER="test2" \
+        POSTGRES_PASSWORD="test" \
+        POSTGRES_RESEARCH_PASSWORD="test2"
     ```
 
 5. Run `poetry run python manage.py makemigrations` and `poetry run python manage.py migrate` to migrate the database.
