@@ -20,7 +20,7 @@ researchdb_file = "researchdb.sql"
 # Variables used by database
 # [ip address, database name, username, password]
 maindb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
-researchdb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_RESEARCH_DB'],os.environ['POSTGRES_USER'],os.environ['POSTGRES_PASSWORD']]
+researchdb = [os.environ['POSTGRES_HOST'],os.environ['POSTGRES_RESEARCH_DB'],os.environ['POSTGRES_RESEARCH_USER'],os.environ['POSTGRES_RESEARCH_PASSWORD']]
 
 
 # Important columns_type = {age, postal, gender}
@@ -32,7 +32,8 @@ def list_to_string(list):
     result = ""
     delim = "/"
     for each in list:
-        result += (str(each) + delim)
+        each = str(each).replace("/","")
+        result += (each + delim)
     return result[:-1]
 
 def filter_data(list):
@@ -40,7 +41,8 @@ def filter_data(list):
     for each in list:
         if type(each) == type([]):
             each = list_to_string(each)
-        result += str(each)+";"
+        each = str(each).replace(";","")
+        result += each+";"
     return result[:-1]
 
 def write_to_file(result):
