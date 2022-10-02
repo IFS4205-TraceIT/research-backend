@@ -2,20 +2,23 @@ import psycopg2
 import os
 import csv
 import pandas as pd
+import anonymize
+import argparse
 from datetime import datetime, date
+import sys
 
-# Variables used by k-anonymity
-k = 3
+# Arguments used by k-anonymity
+k = 2
 kalgo = "mondrian"
 dataset = "traceit"
-basefolder = os.getcwd() + '/anonymisation/'
-kanonymityfolder = "kanonymity"
-datafolder = basefolder + kanonymityfolder + "/data/"
-resultfolder = basefolder + kanonymityfolder + "/results/"
+
+# Folders used
+datafolder = basefolder + "data/"
+resultfolder = basefolder + "results/"
 
 # SQLs files
-view_file = "researchdata_view.sql"
-researchdb_file = "researchdb.sql"
+view_file = basefolder + "researchdata_view.sql"
+researchdb_file = basefolder + "researchdb.sql"
 
 # Variables used by database
 # [ip address, database name, username, password]
@@ -56,7 +59,7 @@ def write_to_file(result):
 
 def db_export(conn):
     cur = conn.cursor()
-    sql_file = open(basefolder + view_file)
+    sql_file = open(view_file)
     sql_as_string = sql_file.read()
     cur.execute(sql_as_string)
     result = cur.fetchall()
@@ -123,7 +126,7 @@ def db_con(dbargs):
 
 
 def clean_db(conn, cur):
-    sql_file = open(basefolder + researchdb_file)
+    sql_file = open(researchdb_file)
     sql_as_string = sql_file.read()
     cur.execute(sql_as_string)
     conn.commit()
@@ -147,6 +150,16 @@ def db_import(conn):
             conn.commit()
             
 
+def get_args(method, kvalue, datafolder_name):
+    parser = argparse.ArgumentParser('K-Anonymize')
+    parser.add_argument('--method', type=str, default=method,
+                        help="K-Anonymity Method")
+    parser.add_argument('--k', type=int, default=kvalue,
+                        help="K-Anonymity or L-Diversity")
+    parser.add_argument('--dataset', type=str, default=datafolder_name,
+                        help="Dataset to anonymize")
+    return parser.parse_args()
+
 def main():
     conn = db_con(maindb)
     if(conn == None):
@@ -155,15 +168,15 @@ def main():
     # Get data from database into a csv file
     data = db_export(conn)
     conn.close()
+
     # Create generalization hierarchy files
     generate_hierarchy(data)
-
+    
     # k-anonymity by kaylode
-    kanon_args = "--method="+ kalgo +" --k="+str(k)+" --dataset="+dataset
-    wdir = os.getcwd()
-    os.chdir(basefolder + kanonymityfolder)
-    os.system("python3 anonymize.py "+kanon_args)
-    os.chdir(wdir)
+    global k
+    args = get_args(kalgo,k,dataset)
+    k = int(args.k)
+    anonymize.main(args)
 
     # Gather anonymized data in results and add to research database
     conn = db_con(researchdb)

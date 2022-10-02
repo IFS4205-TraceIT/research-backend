@@ -1,6 +1,5 @@
 from utils.types import AnonMethod
 import os
-import argparse
 import numpy as np
 import pandas as pd
 from metrics import NCP, DM, CAVG
@@ -11,14 +10,6 @@ from algorithms import (
 from datasets import get_dataset_params
 from utils.data import read_raw, write_anon, numberize_categories
 
-parser = argparse.ArgumentParser('K-Anonymize')
-parser.add_argument('--method', type=str, default='mondrian',
-                    help="K-Anonymity Method")
-parser.add_argument('--k', type=int, default=2,
-                    help="K-Anonymity or L-Diversity")
-parser.add_argument('--dataset', type=str, default='adult',
-                    help="Dataset to anonymize")
-
 class Anonymizer:
     def __init__(self, args):
         self.method = args.method
@@ -28,7 +19,7 @@ class Anonymizer:
         self.csv_path = args.dataset+'.csv'
 
         # Data path
-        self.path = os.path.join('data', args.dataset)  # trailing /
+        self.path = os.path.join(os.getcwd(),"kanonymity",'data', args.dataset)  # trailing /
 
         # Dataset path
         self.data_path = os.path.join(self.path, self.csv_path)
@@ -40,6 +31,8 @@ class Anonymizer:
 
         # folder for all results
         res_folder = os.path.join(
+            os.getcwd(),
+            "kanonymity",
             'results', 
             args.dataset, 
             self.method)
@@ -115,29 +108,6 @@ class Anonymizer:
             ncp = NCP(anon_data, QI_INDEX, ATT_TREES)
             ncp_score = ncp.compute_score()
 
-        # Discernibility Metric
-
-        raw_dm = DM(raw_data, QI_INDEX, self.k)
-        raw_dm_score = raw_dm.compute_score()
-
-        anon_dm = DM(anon_data, QI_INDEX, self.k)
-        anon_dm_score = anon_dm.compute_score()
-
-        # Average Equivalence Class
-
-        raw_cavg = CAVG(raw_data, QI_INDEX, self.k)
-        raw_cavg_score = raw_cavg.compute_score()
-
-        anon_cavg = CAVG(anon_data, QI_INDEX, self.k)
-        anon_cavg_score = anon_cavg.compute_score()
-
-        print(f"NCP score (lower is better): {ncp_score:.3f}")
-        print(f"CAVG score (near 1 is better): BEFORE: {raw_cavg_score:.3f} || AFTER: {anon_cavg_score:.3f}")
-        print(f"DM score (lower is better): BEFORE: {raw_dm_score} || AFTER: {anon_dm_score}")
-        print(f"Time execution: {runtime:.3f}s")
-
-        return ncp_score, raw_cavg_score, anon_cavg_score, raw_dm_score, anon_dm_score
-
 
 def main(args):
     anonymizer = Anonymizer(args)
@@ -145,5 +115,4 @@ def main(args):
     
 
 if __name__ == '__main__':
-    args = parser.parse_args()
     main(args)

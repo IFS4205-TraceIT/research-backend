@@ -42,6 +42,5 @@
 5. Run `poetry run python manage.py makemigrations` and `poetry run python manage.py migrate` to migrate the database.
 6. Run `poetry run python manage.py runserver` to start the server.
 
-# Anonymization and Sample Data
-1. Run `poetry run python anonymisation/sampledata/generate.py` to generate initial data for testing purposes.
-2. Run `poetry run python anonymisation/anonymizer_script.py` to start anonymizing process.
+# Anonymization
+2. Run `poetry run python kanonymity/generate_anon_data.py` to start anonymizing process.
