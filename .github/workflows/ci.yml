@@ -11,11 +11,17 @@ env:
   DJANGO_DEBUG: True
   POETRY_VERSION: 1.2.0
 
-  POSTGRES_HOST: database
+  POSTGRES_HOST: database_research
   POSTGRES_PORT: 5432
   POSTGRES_DB: traceit
   POSTGRES_USER: test
   POSTGRES_PASSWORD: test
+  
+  POSTGRES_AUTH_HOST: database_auth
+  POSTGRES_AUTH_PORT: 5432
+  POSTGRES_AUTH_DB: traceit
+  POSTGRES_AUTH_USER: test
+  POSTGRES_AUTH_PASSWORD: test
 
 jobs:
   research-backend-ci:
@@ -25,7 +31,20 @@ jobs:
     container: python:3.10-slim
 
     services:
-      database:
+      database_auth:
+        image: postgres
+        env:
+          POSTGRES_DB: ${{ env.POSTGRES_AUTH_DB }}
+          POSTGRES_USER: ${{ env.POSTGRES_AUTH_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_AUTH_PASSWORD }}
+        
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+      
+      database_research:
         image: postgres
         env:
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
@@ -78,16 +97,21 @@ jobs:
 
       - name: Migrate Database
         run: |
-          poetry run python manage.py makemigrations
           poetry run python manage.py migrate
+          poetry run python manage.py migrate --database researchs_db
         env:
           DJANGO_DEBUG: ${{ env.DJANGO_DEBUG }}
           DJANGO_SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
-          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
-          POSTGRES_PORT: ${{ env.POSTGRES_PORT }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_RESEARCH_HOST: ${{ env.POSTGRES_HOST }}
+          POSTGRES_RESEARCH_PORT: ${{ env.POSTGRES_PORT }}
+          POSTGRES_RESEARCH_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_RESEARCH_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_RESEARCH_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_AUTH_HOST: ${{ env.POSTGRES_AUTH_HOST }}
+          POSTGRES_AUTH_PORT: ${{ env.POSTGRES_AUTH_PORT }}
+          POSTGRES_AUTH_DB: ${{ env.POSTGRES_AUTH_DB }}
+          POSTGRES_AUTH_USER: ${{ env.POSTGRES_AUTH_USER }}
+          POSTGRES_AUTH_PASSWORD: ${{ env.POSTGRES_AUTH_PASSWORD }}
           VAULT_ADDR: ${{ env.VAULT_ADDR }}
           VAULT_TOKEN: ${{ env.VAULT_ROOT_TOKEN }}
 
@@ -115,10 +139,15 @@ jobs:
         env:
           DJANGO_DEBUG: ${{ env.DJANGO_DEBUG }}
           DJANGO_SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
-          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
-          POSTGRES_PORT: ${{ env.POSTGRES_PORT }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_RESEARCH_HOST: ${{ env.POSTGRES_HOST }}
+          POSTGRES_RESEARCH_PORT: ${{ env.POSTGRES_PORT }}
+          POSTGRES_RESEARCH_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_RESEARCH_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_RESEARCH_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_AUTH_HOST: ${{ env.POSTGRES_AUTH_HOST }}
+          POSTGRES_AUTH_PORT: ${{ env.POSTGRES_AUTH_PORT }}
+          POSTGRES_AUTH_DB: ${{ env.POSTGRES_AUTH_DB }}
+          POSTGRES_AUTH_USER: ${{ env.POSTGRES_AUTH_USER }}
+          POSTGRES_AUTH_PASSWORD: ${{ env.POSTGRES_AUTH_PASSWORD }}
           VAULT_ADDR: ${{ env.VAULT_ADDR }}
           VAULT_TOKEN: ${{ env.VAULT_ROOT_TOKEN }}
