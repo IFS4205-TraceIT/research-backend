@@ -3,12 +3,12 @@ on: [push, pull_request]
 
 # Variables
 env:
-  VAULT_ADDR: http://vault:8200
+  VAULT_ADDR: "http://vault:8200"
   VAULT_ROOT_TOKEN: dev-only-token
   VAULT_VERSION: 1.11.4
 
   DJANGO_SECRET_KEY: test
-  DJANGO_DEBUG: True
+  DJANGO_DEBUG: "True"
   POETRY_VERSION: 1.2.0
 
   POSTGRES_HOST: database_research
