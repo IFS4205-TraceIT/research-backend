@@ -5,6 +5,7 @@ from .models import AuthUser
 
 # Create your tests here.
 class RegistrationTest(TestCase):
+    databases = {'default', 'main_db'}
     def setUp(self) -> None:
         self.client = APIClient()
     
@@ -71,6 +72,7 @@ class RegistrationTest(TestCase):
         self.assertEqual(AuthUser.objects.get().username, 'test')
 
 class LoginTest(TestCase):
+    databases = {'default', 'main_db'}
     def setUp(self) -> None:
         self.client = APIClient()
         res = self.client.post('/auth/register', {
