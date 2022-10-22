@@ -1,4 +1,4 @@
-# Research django web backend
+# Research django web backend [![Research Backend CI](https://github.com/IFS4205-TraceIT/research-backend/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IFS4205-TraceIT/research-backend/actions/workflows/ci.yml) [![SAST](https://github.com/IFS4205-TraceIT/research-backend/actions/workflows/sast.yml/badge.svg?branch=main)](https://github.com/IFS4205-TraceIT/research-backend/actions/workflows/sast.yml)
 
 ## Setting up for local development
 
